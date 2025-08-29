@@ -1,11 +1,7 @@
 // gulpfile.js
-const { src, dest, series } = require('gulp');
+const { task } = require('gulp');
 
-// Example task: copy all JS files from src to dist
-function copyJs() {
-  return src('src/**/*.js')
-    .pipe(dest('dist/'));
-}
-
-// Default task
-exports.default = series(copyJs);
+task('default', function (done) {
+  console.log("✅ Gulp ran successfully for jenkins-deploy-demo!");
+  done();
+});
