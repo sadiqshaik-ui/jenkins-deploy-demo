@@ -15,14 +15,21 @@ jobs:
         node-version: [18.x, 20.x, 22.x]
 
     steps:
-    - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    - name: Build
-      run: |
-        npm install
-        gulp
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Gulp build
+        run: npx gulp
+
+      # Optional: run tests if you have a test script
+      - name: Run Tests
+        run: npm test
+        continue-on-error: true
